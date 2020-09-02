@@ -1,0 +1,26 @@
+{
+  "name": "auth1-project",
+  "version": "1.0.0",
+  "description": "- Authentication.\r - Express Middleware.\r - Password Hashing.\r - Sessions\r - Cookies",
+  "main": "index.js",
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "@types/node": "^14.6.2",
+    "express": "^4.17.1",
+    "node": "^14.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClydeFrog04/node-auth1-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClydeFrog04/node-auth1-project/issues"
+  },
+  "homepage": "https://github.com/ClydeFrog04/node-auth1-project#readme"
+}
