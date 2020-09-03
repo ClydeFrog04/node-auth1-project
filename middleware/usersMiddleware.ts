@@ -1,50 +1,21 @@
 import bcrypt from "bcryptjs";
 import * as usersDb from "../routes/users/usersModel";
 
-
-
-/*
-function restrict() {
-	// put error messaage in variable so it can be re-used
-	const authError = {
-		message: "Invalid credentials",
-	}
-
-	return async (req, res, next) => {
-		try {
-// 			const { username, password } = req.headers
-// 			// make sure the values are not empty
-// 			if (!username || !password) {
-// 				return res.status(401).json(authError)
-// 			}
-//
-// 			const user = await Users.findBy({ username }).first()
-// 			// make sure user exists in the database
-// 			if (!user) {
-// 				return res.status(401).json(authError)
-// 			}
-//
-// 			// compare the plain text password from the request body to the
-// 			// hash we have stored in the database. returns true/false.
-// 			const passwordValid = await bcrypt.compare(password, user.password)
-// 			// make sure password is correct
-// 			if (!passwordValid) {
-// 				return res.status(401).json(authError)
-// 			}
-
-			if (!req.session || !req.session.user) {
-				return res.status(401).json(authError)
-			}
-
-			// if we reach this point, the user is authenticated!
-			next()
-		} catch (err) {
-			next(err)
-		}
-	}
+interface IUsersMiddleware {
+    req: any;
+    res: any;
+    next: any;
 }
-
-module.exports = {
-	restrict,
+//@ts-ignore: todo: is there a way to use an interface to define prop types with a basic function?
+export async function restrict(req, res, next) {
+    const authError = {message: "Invalid credentials"};
+    try {
+        if (!req.session || !req.session.user) {
+            return res.status(401).json(authError);
+        }
+        next();
+    } catch (e) {
+        console.log(e.stack);
+        next(e);
+    }
 }
- */
