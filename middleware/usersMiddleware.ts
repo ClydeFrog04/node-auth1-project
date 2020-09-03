@@ -10,6 +10,7 @@ interface IUsersMiddleware {
 export async function restrict(req, res, next) {
     const authError = {message: "Invalid credentials"};
     try {
+        console.log(req.headers.username);
         if (!req.session || !req.session.user) {
             return res.status(401).json(authError);
         }

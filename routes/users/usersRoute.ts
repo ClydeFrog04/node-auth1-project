@@ -28,10 +28,12 @@ usersRouter.post("/register", async (req, res)=>{
 usersRouter.post("/login", async (req, res)=>{
     try {
         const {username, password} = req.body;
-        const user = await usersDb.findBy({username}).first();
-        const passValid = bcrypt.compare(password, user.password);
 
-        if(!user || !passValid) res.status(401).json({message: "Invalid credentials"});
+        const user = await usersDb.findBy({username}).first();
+        if(!user) return res.status(401).json({message: "Invalid credentials"});
+
+        const passValid = bcrypt.compare(password, user.password);
+        if(!passValid) return res.status(401).json({message: "Invalid credentials"});
 
         //@ts-ignore: TS2532: Object is possibly 'undefined'.
         req.session.user = user;
