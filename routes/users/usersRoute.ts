@@ -1,6 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import * as usersDb from "../../routes/users/usersModel";
+import {restrict} from "../../middleware/usersMiddleware";
 
 export const usersRouter = express.Router();
 
@@ -41,4 +42,23 @@ usersRouter.post("/login", async (req, res)=>{
         console.log(e.stack);
         res.status(500).json({error: "Error logging in"});
     }
+});
+
+usersRouter.get("/users", restrict, async (req, res) => {
+    try {
+        const users = await usersDb.find();
+        res.status(200).json(users);
+    } catch (e) {
+        console.log(e.stack);
+        res.status(500).json({error: "Error getting users"});
+    }
+    /*
+    router.get("/users", usersMiddleware.restrict(), async (req, res, next) => {
+    try {
+        res.json(await Users.find());
+    } catch (err) {
+        next(err);
+    }
+});
+     */
 });
